@@ -12,23 +12,24 @@ class Solution(object):
             l, k = i + 1, len(nums) - 1
             while l < k:
                 if nums[l] + nums[k] + nums[i] == 0:
-                    good_list.append([nums[i], nums[l], nums[k]])
+                    if not(k < len(nums) - 1 and nums[k] == nums[k+1]):
+                        good_list.append([nums[i], nums[l], nums[k]])
                     l += 1
                     if nums[l] == nums[l-1]:
                         l += 1
                     k -= 1
                     if nums[k] == nums[k+1]:
                         k -= 1
-                elif nums[l] + nums[k] + nums[i] <= 0:
+                elif nums[l] + nums[k] + nums[i] < 0:
                     l += 1
                     if nums[l] == nums[l - 1]:
                         l += 1
-                elif nums[l] + nums[k] + nums[i] >= 0:
+                elif nums[l] + nums[k] + nums[i] > 0:
                     k -= 1
                     if nums[k] == nums[k + 1]:
                         k -= 1
         return good_list
 
 solution = Solution()
-list = [1,1,2,-2,-1]
+list = [-2,0,3,-1,4,0,3,4,1,1,1,-3,-5,4,0]
 print(solution.threeSum(list))
